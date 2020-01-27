@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="VästtrafikUWP.Views.MapView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:livemap="using:VästtrafikUWP.Models.LiveMap"
+    xmlns:converters="using:VästtrafikUWP.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <UserControl.Resources>
+        <converters:VehicleIconConverter x:Key="IconConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- TITLE -->
+        <TextBlock 
+            Grid.Row="0" 
+            FontSize="24" 
+            Margin="20 15 0 0" 
+            Text="Karta"/>
+        
+        <!-- MAP -->
+        <maps:MapControl 
+            Grid.Row="1" 
+            x:Name="Map"
+            ZoomLevel="10"
+            Loading="MapControl_LoadingAsync">
+            <maps:MapItemsControl ItemsSource="{x:Bind viewModel.LiveVehicles, Mode=OneWay}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="livemap:Vehicle">
+                        <Grid maps:MapControl.Location="{x:Bind Location, Mode=OneWay}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+                            <Image
+                                Grid.Row="0"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Center"
+                                Source="{x:Bind ProductClass, Converter={StaticResource IconConverter}}"
+                                Margin="0 0 0 3"/>
+                            <Rectangle
+                                Grid.Row="1"
+                                Fill="{x:Bind LineColor, Mode=OneWay}"
+                                RadiusX="3"
+                                RadiusY="3"/>
+                            <TextBlock
+                                Grid.Row="1"
+                                Text="{x:Bind Name, Mode=OneWay}"
+                                Foreground="{x:Bind BackgroundColor, Mode=OneWay}"
+                                FontSize="10"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Padding="2"/>
+                        </Grid>
+                        
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+        </maps:MapControl>
+    </Grid>
+</Page>

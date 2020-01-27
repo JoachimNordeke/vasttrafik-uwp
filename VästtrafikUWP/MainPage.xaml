@@ -1,0 +1,91 @@
+﻿<Page
+    x:Class="VästtrafikUWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:locations="using:VästtrafikUWP.Models.Locations"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!-- TOP BAR -->
+        <Grid Grid.Row="0" Background="#009DDB">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image
+                Grid.Column="0"
+                Source="/Assets/vasttrafik-183x40.png" 
+                HorizontalAlignment="Left" 
+                Height="40" 
+                Margin="15" />
+                <AutoSuggestBox
+                    ItemsSource="{x:Bind viewModel.StopLocations, Mode=OneWay}"
+                    TextChanged="StandardStop_TextChangedAsync"
+                    SuggestionChosen="StandardStop_SuggestionChosen"
+                    Width="250"
+                    Text="{x:Bind viewModel.ChosenStop.Name, Mode=OneWay}"
+                    x:Name="StandardStop"
+                    Grid.Column="1" 
+                    Margin="0 0 15 0" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Right"
+                    Height="32" 
+                    PlaceholderText="Välj standardhållplats">
+                    <AutoSuggestBox.ItemTemplate>
+                        <DataTemplate x:DataType="locations:StopLocation">
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </DataTemplate>
+                    </AutoSuggestBox.ItemTemplate>
+                </AutoSuggestBox>
+            </Grid>
+        </Grid>
+        
+        <!-- NAVIGATION VIEW -->
+        <NavigationView 
+            Grid.Row="1" 
+            x:Name="topBar" 
+            Loaded="topbar_Loaded" 
+            ItemInvoked="topbar_ItemInvokedAsync" 
+            PaneDisplayMode="Top" 
+            IsTabStop="false" 
+            IsSettingsVisible="false"
+            IsBackButtonVisible="Collapsed">
+            <NavigationView.MenuItems>
+                <NavigationViewItem 
+                    Icon="Bookmarks" 
+                    Tag="StopInformationPage">
+                    <TextBlock 
+                        Tag="Nav_StopInformationPage"
+                        Text="Hållplatsinformation"/>
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    Icon="Map" 
+                    Tag="MapPage">
+                    <TextBlock 
+                        Tag="Nav_MapPage" 
+                        Text="Karta"/>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    Icon="Street" 
+                    Tag="StopDeparturesPage">
+                    <TextBlock 
+                        Tag="Nav_StopDeparturesPage" 
+                        Text="Hållplatsavgångar"/>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            
+            <!-- CONTENT CONTAINER -->
+            <Frame x:Name="contentFrame"></Frame>
+        </NavigationView>
+
+    </Grid>
+</Page>

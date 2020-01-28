@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 using Windows.Devices.Geolocation;
 
@@ -11,12 +13,34 @@ using VästtrafikUWP.Models.Locations;
 
 namespace VästtrafikUWP.ViewModels
 {
-    class MapViewViewModel
+    class MapViewViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<StopLocation> NearestStops = new ObservableCollection<StopLocation>();
         public ObservableCollection<Vehicle> LiveVehicles = new ObservableCollection<Vehicle>();
 
         public Geopoint Position { get; set; }
+
+        private string time;
+        public string Time
+        {
+            get => time;
+            set
+            {
+                time = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateTime()
+        {
+            Time = DateTime.Now.ToString("HH:mm:ss");
+        }
 
         public async Task LoadUserPositionAsync()
         {

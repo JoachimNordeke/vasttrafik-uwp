@@ -13,20 +13,34 @@
     <UserControl.Resources>
         <converters:VehicleIconConverter x:Key="IconConverter"/>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <!-- TITLE -->
-        <TextBlock 
-            Grid.Row="0" 
-            FontSize="24" 
-            Margin="20 15 0 0" 
-            Text="Karta"/>
-        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+            Grid.Column="0"
+            FontSize="24"
+            Text="Karta"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Margin="15 0 15 0"/>
+            <TextBlock 
+            Grid.Column="1"
+            FontSize="24"
+            Text="{x:Bind viewModel.Time, Mode=OneWay}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="15 0 15 0"/>
+        </Grid>
+
         <!-- MAP -->
         <maps:MapControl 
             Grid.Row="1" 
@@ -61,7 +75,7 @@
                                 HorizontalAlignment="Center"
                                 Padding="2"/>
                         </Grid>
-                        
+
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>

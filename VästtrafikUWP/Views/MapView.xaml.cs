@@ -17,6 +17,9 @@ namespace VästtrafikUWP.Views
         public MapView()
         {
             viewModel = new MapViewViewModel();
+
+            UpdateTimeAsync();
+
             this.InitializeComponent();
         }
 
@@ -46,6 +49,15 @@ namespace VästtrafikUWP.Views
                 await viewModel.LoadLiveVehiclesAsync(minx, maxx, miny, maxy);
 
                 await Task.Delay(5000);
+            }
+        }
+
+        private async void UpdateTimeAsync()
+        {
+            while (true)
+            {
+                viewModel.UpdateTime();
+                await Task.Delay(1000);
             }
         }
     }

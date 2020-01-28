@@ -18,8 +18,6 @@ namespace VästtrafikUWP
         MainPageViewModel viewModel;
         public MainPage()
         {
-            ApiService.GetTokenAsync();
-
             viewModel = new MainPageViewModel();
             this.InitializeComponent();
         }

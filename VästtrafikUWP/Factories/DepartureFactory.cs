@@ -6,7 +6,7 @@ namespace VästtrafikUWP.Factories
 {
     static class DepartureFactory
     {
-        public static DepartureViewModel DepartureToDepartureViewModel(Departure departure, int counter)
+        public static DepartureViewModel DepartureToDepartureViewModel(Departure departure)
         {
             if (departure != null)
             {
@@ -24,8 +24,7 @@ namespace VästtrafikUWP.Factories
                 return new DepartureViewModel
                 {
                     Departure = departure,
-                    MinutesLeft = (minutesLeft == "0" ? "Nu" : minutesLeft),
-                    Background = (counter % 2 == 0 ? "Darkgray" : "Black")
+                    MinutesLeft = (minutesLeft == "0" ? "Nu" : minutesLeft)
                 };
             }
 

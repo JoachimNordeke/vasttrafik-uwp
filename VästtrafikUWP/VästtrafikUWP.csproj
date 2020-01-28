@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\AlternateColorConverter.cs" />
     <Compile Include="Converters\VehicleIconConverter.cs" />
     <Compile Include="Data\ApiService.cs" />
     <Compile Include="Factories\DepartureFactory.cs" />

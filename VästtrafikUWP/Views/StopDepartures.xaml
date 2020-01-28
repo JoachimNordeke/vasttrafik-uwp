@@ -5,6 +5,7 @@
     xmlns:departures="using:VästtrafikUWP.Models.Departure"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:VästtrafikUWP.Converters"
     mc:Ignorable="d"
     Background="Black">
     <Page.Resources>
@@ -15,6 +16,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <converters:AlternateColorConverter x:Key="AlternateColorConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -59,7 +61,7 @@
                     SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="departures:DepartureViewModel">
-                        <ListViewItem Background="{x:Bind Background}" Padding="0" HorizontalContentAlignment="Stretch">
+                        <ListViewItem Background="{Binding Converter={StaticResource AlternateColorConverter}}" Padding="0" HorizontalContentAlignment="Stretch">
                             <Grid Margin="0 0 15 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200"/>

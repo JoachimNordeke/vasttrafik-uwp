@@ -47,7 +47,7 @@ namespace VästtrafikUWP.ViewModels
             int counter = 0;
             departures.ForEach(x => 
             {
-                Departures.Add(DepartureFactory.DepartureToDepartureViewModel(x, counter));
+                Departures.Add(DepartureFactory.DepartureToDepartureViewModel(x));
                 counter++;
             });
 

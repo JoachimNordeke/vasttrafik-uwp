@@ -28,7 +28,7 @@
             <TextBlock 
             Grid.Column="0"
             FontSize="24"
-            Text="Karta"
+            Text="Livekarta"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             Margin="15 0 15 0"/>

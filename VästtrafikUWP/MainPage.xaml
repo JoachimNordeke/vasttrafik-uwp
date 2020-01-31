@@ -72,7 +72,7 @@
                     Tag="MapPage">
                     <TextBlock 
                         Tag="Nav_MapPage" 
-                        Text="Karta"/>
+                        Text="Livekarta"/>
                 </NavigationViewItem>
                 <NavigationViewItem
                     Icon="Street" 
